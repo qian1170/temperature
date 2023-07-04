@@ -21,7 +21,7 @@ def process_data(data, countries, continent_map):
     
     copy=data.copy()
     data.dropna(axis=0,inplace=True)
-    data['Date']=pd.to_datetime(data.dt)
+    data['Date']=pd.to_datetime(data.dt,errors='coerce')
     data2=data.copy()
     data2.drop(columns=['dt'],axis=1,inplace=True)
     data2['month']=data2['Date'].dt.month
