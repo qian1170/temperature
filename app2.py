@@ -16,17 +16,15 @@ def load_data():
     return data, countries, continent_map
 
 def process_data(data, countries, continent_map):
-    # Your data processing code here ...
-    # Remember to return your processed dataframes 'region' and 'countries'
-    
+
     copy=data.copy()
     data.dropna(axis=0,inplace=True)
-    #data['Date']=pd.to_datetime(data.dt,errors='coerce')
+    data['Date']=pd.to_datetime(data['dt'])
     data2=data.copy()
     data2.drop(columns=['dt'],axis=1,inplace=True)
-    data2['month']=data2['Date'].dt.month
-    data2['year']=data2['Date'].dt.year
-    data2['week']=data2['Date'].dt.isocalendar().week
+    data2['month']=data2['Date'].month
+    data2['year']=data2['Date'].year
+    data2['week']=data2['Date'].isocalendar().week
     earth_data=data2.groupby(by='year')[['LandAverageTemperature', 'LandAverageTemperatureUncertainty','LandMaxTemperature', 'LandMaxTemperatureUncertainty','LandMinTemperature', 'LandMinTemperatureUncertainty','LandAndOceanAverageTemperature','LandAndOceanAverageTemperatureUncertainty']].mean().reset_index()
 
     # Read countries data
