@@ -18,9 +18,7 @@ def load_data():
 def process_data(data, countries, continent_map):
 
     copy=data.copy()
-    data.dropna(axis=0,inplace=True)
     data['Date']=pd.to_datetime(data['dt'])
-    data.loc[data['dt'].str.contains('1743-11-011743-12-01'), 'dt'] = '1743-11-01' 
     data2=data.copy()
     data2.drop(columns=['dt'],axis=1,inplace=True)
     data2['month']=data2['Date'].dt.month
